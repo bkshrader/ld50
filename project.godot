@@ -8,15 +8,20 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "",
+"class": "GitAPI",
+"language": "NativeScript",
+"path": "res://addons/godot-git-plugin/git_api.gdns"
+} ]
+_global_script_class_icons={
+"GitAPI": ""
+}
+
 [application]
 
-config/name="LD50"
-config/icon="res://icon.png"
+run/main_scene="res://levels/test.tscn"
 
-[physics]
+[gdnative]
 
-common/enable_pause_aware_picking=true
-
-[rendering]
-
-environment/default_environment="res://default_env.tres"
+singletons=[ "res://addons/godot-git-plugin/git_api.gdnlib" ]
