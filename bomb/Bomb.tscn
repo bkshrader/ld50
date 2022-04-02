@@ -53,7 +53,7 @@ contact_monitor = true
 script = ExtResource( 1 )
 blast_area_gradient = SubResource( 8 )
 
-[node name="Bomb" type="Sprite" parent="."]
+[node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
@@ -121,3 +121,4 @@ one_shot = true
 [connection signal="body_entered" from="." to="." method="_on_Bomb_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Fuse_timeout"]
 [connection signal="timeout" from="Beeper" to="." method="_on_Beep"]
+[connection signal="timeout" from="BlastFade" to="." method="queue_free"]

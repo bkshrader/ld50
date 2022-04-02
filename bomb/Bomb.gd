@@ -20,6 +20,8 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	$TimerLabel.set_text("%02d" % ceil($Timer.time_left))
+	if $BlastFade.time_left > 0:
+		update()
 
 
 func _draw():
@@ -29,6 +31,7 @@ func _draw():
 
 func _on_Fuse_timeout():
 	$Beeper.stop()
+	$Sprite.set_visible(false)
 	$ExplosionSFX.play()
 	$ExplosionFX.set_emitting(true)
 	$BlastFade.start(blast_area_fade_duration)
