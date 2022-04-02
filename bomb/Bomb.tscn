@@ -1,0 +1,123 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://bomb/Bomb.gd" type="Script" id=1]
+[ext_resource path="res://art/objects/Bomb.png" type="Texture" id=2]
+[ext_resource path="res://sounds/Explosion 5 - Sound effects Pack 2.wav" type="AudioStream" id=3]
+[ext_resource path="res://sounds/Blip 1 - Sound effects Pack 2.wav" type="AudioStream" id=4]
+[ext_resource path="res://sounds/Coins 6 - Sound effects Pack 2.wav" type="AudioStream" id=5]
+
+[sub_resource type="Gradient" id=8]
+offsets = PoolRealArray( 0, 0.835979, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1 )
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16, 16 )
+
+[sub_resource type="Gradient" id=4]
+offsets = PoolRealArray( 0, 0.130435, 0.826087, 0.937888 )
+colors = PoolColorArray( 1, 1, 1, 1, 0.839216, 0.443137, 0.0588235, 1, 0.839216, 0.150276, 0.0588235, 1, 0.12549, 0.12549, 0.12549, 1 )
+
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
+
+[sub_resource type="Curve" id=6]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=7]
+width = 1024
+curve = SubResource( 6 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+lifetime_randomness = 0.1
+emission_shape = 1
+emission_sphere_radius = 5.0
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 250.0
+initial_velocity_random = 0.6
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 5.0
+scale_random = 0.2
+scale_curve = SubResource( 7 )
+color_ramp = SubResource( 5 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 128.0
+
+[node name="Bomb" type="RigidBody2D"]
+contacts_reported = 16
+contact_monitor = true
+script = ExtResource( 1 )
+blast_area_gradient = SubResource( 8 )
+
+[node name="Bomb" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="TimerLabel" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -14.0
+margin_top = -8.0
+margin_right = 14.0
+margin_bottom = 12.0
+text = "10"
+align = 1
+valign = 1
+max_lines_visible = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Beeper" type="Timer" parent="."]
+
+[node name="TimerSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+
+[node name="ExplosionFX" type="Particles2D" parent="."]
+emitting = false
+amount = 128
+lifetime = 1.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource( 3 )
+
+[node name="ExplosionSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+volume_db = 5.0
+
+[node name="BlastArea" type="Area2D" parent="."]
+monitorable = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlastArea"]
+shape = SubResource( 2 )
+
+[node name="TimerResetSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
+
+[node name="BlastFade" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_Bomb_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Fuse_timeout"]
+[connection signal="timeout" from="Beeper" to="." method="_on_Beep"]

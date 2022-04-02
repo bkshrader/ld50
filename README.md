@@ -33,3 +33,4 @@ Use the bomb to your advantage and find a way to escape this room, but be carefu
 
 ### Assets
 - [Industrial Zone Tileset](https://free-game-assets.itch.io/free-industrial-zone-tileset-pixel-art)
+- [Sound Effects Pack 2](https://phoenix1291.itch.io/sound-effects-pack-2)

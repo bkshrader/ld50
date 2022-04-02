@@ -31,3 +31,7 @@ func _physics_process(delta):
 	if not is_on_floor():
 		input.y = clamp(input.y, 0, INF)
 	self.velocity = move_and_slide(velocity + 10 * input, Vector2.UP, true)
+
+
+func destroy():
+	print("Player Destroyed: Game Over")
