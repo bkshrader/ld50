@@ -18,21 +18,15 @@ _global_script_classes=[ {
 "class": "Level",
 "language": "GDScript",
 "path": "res://levels/Level.gd"
-}, {
-"base": "KinematicBody2D",
-"class": "Player",
-"language": "GDScript",
-"path": "res://player/player.gd"
 } ]
 _global_script_class_icons={
 "GitAPI": "",
-"Level": "",
-"Player": ""
+"Level": ""
 }
 
 [application]
 
-run/main_scene="res://levels/test.tscn"
+run/main_scene="res://Main.tscn"
 
 [gdnative]
 

@@ -1,7 +1,7 @@
 extends Node2D
 
+var player_scene = preload("res://player/player.tscn")
+
 func _ready():
-	self.set_visible(false)
-	var current_scene = get_tree().get_current_scene()
-	if current_scene is Level:
-		current_scene.call_deferred('spawn_player', position)
+	var player = player_scene.instance()
+	add_child(player)
