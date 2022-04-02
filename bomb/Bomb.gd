@@ -32,6 +32,7 @@ func _draw():
 func _on_Fuse_timeout():
 	$Beeper.stop()
 	$Sprite.set_visible(false)
+	$TimerLabel.set_visible(false)
 	$ExplosionSFX.play()
 	$ExplosionFX.set_emitting(true)
 	$BlastFade.start(blast_area_fade_duration)
