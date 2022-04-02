@@ -1,6 +1,7 @@
 # _untitled project_
 
-_unknown tagline_
+A puzzle platformer where you're stuck in a room with a ticking time bomb, but every time you touch the bomb the timer resets.
+Use the bomb to your advantage and find a way to escape this room, but be careful not to blow up anything important.
 
 ## Ludum Dare 50: _category_ entry
 
@@ -18,6 +19,7 @@ _unknown tagline_
 ### Game
 
 - Bradley Shrader ([@bkshrader](https://github.com/bkshrader))
+- Joe Schmidt ([@ArgosOfIthica](https://github.com/argosofithica))
 
 ### Tools
 
