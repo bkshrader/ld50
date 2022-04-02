@@ -1,4 +1,4 @@
-extends Node2D
+extends "Level.gd"
 
 
 # Declare member variables here. Examples:
