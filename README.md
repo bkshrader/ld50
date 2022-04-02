@@ -28,3 +28,6 @@ _unknown tagline_
 - [Readme based on template by `Steffo99`](https://github.com/Steffo99/template-godot-ld50)
 - [Git](https://git-scm.com/)
 - [GitHub](https://github.com/)
+
+### Assets
+- [Industrial Zone Tileset](https://free-game-assets.itch.io/free-industrial-zone-tileset-pixel-art)
