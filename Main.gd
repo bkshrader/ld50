@@ -9,6 +9,7 @@ var test_scene = preload("res://levels/test.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var test = test_scene.instance()
+	test.set_name("Level")
 	add_child(test)
 	
 
