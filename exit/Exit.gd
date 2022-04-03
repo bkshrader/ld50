@@ -1,5 +1,7 @@
 extends Node2D
 
+var Player = preload('res://player/player.gd')
+
 signal exit_reached
 
 # Declare member variables here. Examples:
@@ -18,8 +20,7 @@ func _ready():
 
 
 func _on_body_entered(body):
-	pass
-#	if body is Player:
-#		print("Exit Reached: End Level")
-#		emit_signal('exit_reached')
+	if body is Player:
+		print("Exit Reached: End Level")
+		emit_signal('exit_reached')
 	
