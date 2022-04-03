@@ -17,6 +17,11 @@ const player = preload('res://player/player.tscn')
 #func _process(delta):
 #	pass
 
+func _input(event):
+	if event is InputEventKey:
+		if event.pressed and event.is_action("ui_reset"):
+			get_tree().reload_current_scene()
+
 
 func spawn_player(position: Vector2):
 	print("Spawning player at: %s" % position)

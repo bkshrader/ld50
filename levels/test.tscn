@@ -58,5 +58,5 @@ position = Vector2( 656, 368 )
 [node name="CrateStairs" parent="." instance=ExtResource( 8 )]
 position = Vector2( 277, 547 )
 
-[node name="Node2D" parent="." instance=ExtResource( 5 )]
+[node name="BombSpawner" parent="." instance=ExtResource( 5 )]
 position = Vector2( 240, 496 )
