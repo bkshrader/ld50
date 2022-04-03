@@ -30,6 +30,7 @@ func _draw():
 
 
 func _on_Fuse_timeout():
+	set_sleeping(true)
 	$Beeper.stop()
 	$Sprite.set_visible(false)
 	$TimerLabel.set_visible(false)
