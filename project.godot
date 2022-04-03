@@ -18,10 +18,16 @@ _global_script_classes=[ {
 "class": "Level",
 "language": "GDScript",
 "path": "res://levels/Level.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://player/player.gd"
 } ]
 _global_script_class_icons={
 "GitAPI": "",
-"Level": ""
+"Level": "",
+"Player": ""
 }
 
 [application]
@@ -31,6 +37,12 @@ run/main_scene="res://Main.tscn"
 [gdnative]
 
 singletons=[ "res://addons/godot-git-plugin/git_api.gdnlib" ]
+
+[importer_defaults]
+
+texture={
+"flags/filter": false
+}
 
 [input]
 

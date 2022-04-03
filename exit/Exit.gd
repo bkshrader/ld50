@@ -1,6 +1,6 @@
 extends Node2D
 
-var Player = preload('res://player/player.gd')
+const Player = preload('res://player/player.gd')
 
 signal exit_reached
 
