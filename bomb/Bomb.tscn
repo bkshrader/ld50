@@ -1,10 +1,13 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://bomb/Bomb.gd" type="Script" id=1]
 [ext_resource path="res://art/objects/Bomb.png" type="Texture" id=2]
 [ext_resource path="res://sounds/Explosion 5 - Sound effects Pack 2.wav" type="AudioStream" id=3]
 [ext_resource path="res://sounds/Blip 1 - Sound effects Pack 2.wav" type="AudioStream" id=4]
 [ext_resource path="res://sounds/Coins 6 - Sound effects Pack 2.wav" type="AudioStream" id=5]
+
+[sub_resource type="PhysicsMaterial" id=9]
+friction = 0.3
 
 [sub_resource type="Gradient" id=8]
 offsets = PoolRealArray( 0, 0.835979, 1 )
@@ -51,6 +54,8 @@ radius = 128.0
 z_index = 1
 z_as_relative = false
 mode = 2
+mass = 0.1
+physics_material_override = SubResource( 9 )
 contacts_reported = 16
 contact_monitor = true
 script = ExtResource( 1 )

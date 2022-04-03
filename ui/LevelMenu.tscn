@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://ui/LevelMenu.gd" type="Script" id=1]
+[ext_resource path="res://ui/DefaultTheme.tres" type="Theme" id=2]
 
 [node name="LevelMenu" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -10,4 +11,22 @@ margin_right = 12.0
 margin_bottom = 20.0
 text = "Back"
 
+[node name="GridContainer" type="GridContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 128.0
+margin_top = 128.0
+margin_right = -128.0
+margin_bottom = -128.0
+
+[node name="Level1" type="Button" parent="GridContainer"]
+margin_right = 768.0
+margin_bottom = 344.0
+rect_min_size = Vector2( 32, 32 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 2 )
+text = "1"
+
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="GridContainer/Level1" to="." method="_on_Level1_pressed"]
