@@ -2,9 +2,7 @@ extends Node2D
 
 
 # Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-# var test_scene = preload("res://levels/test.tscn")
+var history = ["res://ui/MainMenu.tscn"]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -22,9 +20,18 @@ func remove_children():
 
 
 func on_load_scene(scene):
+	history.push_front(scene)
 	var scene_class = load(scene)
 	var scene_instance = scene_class.instance()
 	remove_children()
 	add_child(scene_instance)
+	
 	if scene_instance.has_signal('load_scene'):
 		scene_instance.connect('load_scene', self, 'on_load_scene')
+	
+	if scene_instance.has_signal('reload_scene'):
+		scene_instance.connect('reload_scene', self, 'on_reload_scene')
+
+
+func on_reload_scene():
+	on_load_scene(history[0])
