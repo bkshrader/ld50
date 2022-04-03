@@ -31,7 +31,15 @@ func on_load_scene(scene):
 	
 	if scene_instance.has_signal('reload_scene'):
 		scene_instance.connect('reload_scene', self, 'on_reload_scene')
+	
+	if scene_instance.has_signal('previous_scene'):
+		scene_instance.connect('previous_scene', self, 'on_previous_scene')
 
 
 func on_reload_scene():
+	on_load_scene(history[0])
+
+
+func on_previous_scene():
+	history.pop_front()
 	on_load_scene(history[0])
