@@ -1,6 +1,7 @@
 class_name Player
 extends RigidBody2D
 
+signal tile_collided(position, direction)
 
 # Member Variables
 export var movement_acceleration = 400.0
@@ -43,9 +44,13 @@ func _integrate_forces(state):
 	var was_on_floor = is_on_floor
 	is_on_floor = false
 	for i in range(state.get_contact_count()):
-		# var body = state.get_contact_collider_object(i)
+		var body = state.get_contact_collider_object(i)
 		# var contact_velocity = state.get_contact_collider_velocity_at_position(i)
+		var pos = state.get_contact_local_position(i)
 		var normal = state.get_contact_local_normal(i)
+
+		if body.name == "Dynamic":
+			emit_signal('tile_collided', to_global(pos), -normal)
 
 		# Check if player is on floor
 		if normal.dot(Vector2.UP) >= cos(PI/4):
@@ -70,11 +75,3 @@ func _integrate_forces(state):
 
 func destroy():
 	print("Player Destroyed: Game Over")
-
-
-func _on_Player_body_entered(_body):
-	pass
-
-func _on_Player_body_exited(body):
-	var bodies = get_colliding_bodies()
-	bodies.erase(body)

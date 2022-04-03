@@ -34,6 +34,3 @@ one_shot = true
 
 [node name="GraceTimer" type="Timer" parent="."]
 one_shot = true
-
-[connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]
-[connection signal="body_exited" from="." to="." method="_on_Player_body_exited"]
