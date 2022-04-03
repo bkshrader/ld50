@@ -48,6 +48,8 @@ color_ramp = SubResource( 5 )
 radius = 128.0
 
 [node name="Bomb" type="RigidBody2D"]
+z_index = 1
+z_as_relative = false
 contacts_reported = 16
 contact_monitor = true
 script = ExtResource( 1 )
