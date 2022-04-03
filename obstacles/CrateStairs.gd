@@ -17,3 +17,8 @@ export var flipped = true
 func _process(_delta):
 	$Sprite.flip_h = flipped
 	$Collision.set_rotation_degrees(90 if flipped else 0)
+
+
+# Allow bomb to destroy object
+func destroy():
+	queue_free()
