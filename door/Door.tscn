@@ -10,7 +10,7 @@ extents = Vector2( 16, 32 )
 script = ExtResource( 2 )
 
 [node name="Top" type="Sprite" parent="."]
-position = Vector2( 32, 64 )
+position = Vector2( 32, -7.62939e-06 )
 rotation = 3.14159
 texture = ExtResource( 1 )
 centered = false
@@ -22,6 +22,7 @@ __meta__ = {
 }
 
 [node name="Bottom" type="Sprite" parent="."]
+position = Vector2( 0, -64 )
 texture = ExtResource( 1 )
 centered = false
 flip_v = true
@@ -32,7 +33,7 @@ __meta__ = {
 }
 
 [node name="Collider" type="StaticBody2D" parent="."]
-position = Vector2( 16, 48 )
+position = Vector2( 16, -16 )
 __meta__ = {
 "_edit_lock_": true
 }
