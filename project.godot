@@ -38,6 +38,7 @@ _global_script_class_icons={
 
 [application]
 
+config/name="Fire in the Hole"
 run/main_scene="res://Main.tscn"
 
 [gdnative]

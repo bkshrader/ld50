@@ -1,4 +1,4 @@
-# _untitled project_
+# Fire in the Hole
 
 A puzzle platformer where you're stuck in a room with a ticking time bomb, but every time you touch the bomb the timer resets.
 Use the bomb to your advantage and find a way to escape this room, but be careful not to blow up anything important.
