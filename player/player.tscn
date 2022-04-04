@@ -34,19 +34,19 @@ position = Vector2( -13.6, 7.06001 )
 scale = Vector2( 0.622222, 0.420132 )
 polygon = PoolVector2Array( 33.4286, -35.4175, 30.8571, -7.37864, 42.4286, 54.6019, 30.8571, 54.6019, 23.1429, 26.5631, 12.8571, 54.6019, 1.28572, 54.6019, 12.8571, -7.37864, 12.8571, -35.4175, -1.28571, -16.1728, -3.85714, -32.7371, 10.2857, -51.6505, 18, -54.6019, 9, -73.7864, 21.8571, -92.9709, 39.8571, -73.5534, 28.2857, -54.6019, 33.4286, -51.6505, 47.5714, -34.2429, 45, -17.6786 )
 
-[node name="JumpTimer" type="Timer" parent="."]
-one_shot = true
-
-[node name="GraceTimer" type="Timer" parent="."]
-one_shot = true
-
 [node name="CarryPosition" type="Position2D" parent="."]
-position = Vector2( 32, -8 )
+position = Vector2( 28, 0 )
 
 [node name="GrabArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GrabArea"]
 position = Vector2( 0, 13 )
 shape = SubResource( 3 )
+
+[node name="GraceTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="JumpTimer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="timeout" from="JumpTimer" to="." method="_on_JumpTimer_timeout"]

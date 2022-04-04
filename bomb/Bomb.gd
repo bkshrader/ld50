@@ -77,11 +77,6 @@ func drop():
 	attached_to = null
 
 
-func throw():
-	pass
-
-
-
 func _on_Fuse_timeout():
 	set_sleeping(true)
 	$Beeper.stop()
