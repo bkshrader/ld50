@@ -50,7 +50,7 @@ align = 1
 margin_top = 249.0
 margin_right = 452.0
 margin_bottom = 263.0
-text = "Made for Ludem Dare 50"
+text = "Made for Ludum Dare 50"
 
 [node name="HSeparator" type="HSeparator" parent="VBox"]
 margin_top = 267.0
