@@ -11,6 +11,7 @@ export var max_jump_duration = 0.2
 export var jump_grace_duration = 0.1
 
 var is_on_floor = false
+var is_jump_over = true
 
 
 # Called when the node enters the scene tree for the first time.
@@ -59,7 +60,7 @@ func _integrate_forces(state):
 	# Handle Jumping
 	if Input.is_action_pressed("player_jump"):
 		var grounded = is_on_floor or $GraceTimer.time_left > 0
-		var can_jump = grounded or $JumpTimer.time_left > 0
+		var can_jump = is_jump_over and grounded or $JumpTimer.time_left > 0
 		if can_jump:
 			set_axis_velocity(jump_speed * Vector2.UP)
 			if $JumpTimer.is_stopped():
@@ -69,9 +70,14 @@ func _integrate_forces(state):
 		$GraceTimer.start(jump_grace_duration)
 	
 	if Input.is_action_just_released("player_jump"):
+		is_jump_over = true
 		$JumpTimer.stop()
 		$GraceTimer.stop()
 
 
 func destroy():
 	print("Player Destroyed: Game Over")
+
+
+func _on_JumpTimer_timeout():
+	is_jump_over = false
