@@ -22,6 +22,8 @@ func _ready():
 			trigger_node.connect('activated', self, 'open')
 		if trigger_node.has_signal('deactivated'):
 			trigger_node.connect('deactivated', self, 'close')
+	
+	set_opened(opened)  # Play open animation if the door is inverted
 
 
 
