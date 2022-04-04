@@ -2,7 +2,6 @@ class_name Bomb
 extends RigidBody2D
 
 
-
 export var fuse_duration = 10
 export var beep_interval_min = 0.05
 export var beep_interval_max = 1
@@ -16,7 +15,6 @@ var attached_to: Node2D
 func _ready():
 	reset_timer(false)
 	
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):

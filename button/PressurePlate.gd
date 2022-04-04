@@ -1,8 +1,8 @@
 tool
 extends Node2D
 
-signal button_pressed
-signal button_released
+signal activated
+signal deactivated
 
 
 export var pressed = false setget set_pressed, is_pressed
@@ -24,11 +24,11 @@ func set_pressed(press):
 		# Tween press down
 		$Tween.interpolate_property($Button, 'position', $ButtonUp.position, $ButtonDown.position,
 		press_duration, Tween.TRANS_LINEAR, Tween.EASE_OUT)
-		emit_signal("button_pressed")
+		emit_signal("activated")
 	if not press and pressed:
 		$Tween.interpolate_property($Button, 'position', $ButtonDown.position, $ButtonUp.position,
 		press_duration, Tween.TRANS_LINEAR, Tween.EASE_OUT)
-		emit_signal("button_released")
+		emit_signal("deactivated")
 	
 	$Tween.start()
 	

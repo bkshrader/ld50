@@ -17,8 +17,10 @@ const REGION_CLOSED = Rect2(0, 128, 32, 32)
 func _ready():
 	var trigger_node = get_node(trigger)
 	if trigger_node:
-		trigger_node.connect('button_released', self, 'close')
-		trigger_node.connect('button_pressed', self, 'open')
+		if trigger_node.has_signal('activated'):
+			trigger_node.connect('activated', self, 'open')
+		if trigger_node.has_signal('deactivated'):
+			trigger_node.connect('deactivated', self, 'close')
 
 
 
