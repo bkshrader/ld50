@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://art/tiles/industrial_zone.tres" type="TileSet" id=1]
+[ext_resource path="res://art/tiles/Obstacles.tres" type="TileSet" id=2]
+[ext_resource path="res://player/PlayerSpawn.tscn" type="PackedScene" id=3]
+[ext_resource path="res://bomb/BombSpawner.tscn" type="PackedScene" id=4]
+[ext_resource path="res://exit/Exit.tscn" type="PackedScene" id=5]
+
+[node name="Level" type="Node2D"]
+
+[node name="Background" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 32, 32 )
+collision_layer = 0
+collision_mask = 0
+format = 1
+
+[node name="Static" type="TileMap" parent="."]
+z_index = -1
+z_as_relative = false
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 32, 32 )
+format = 1
+
+[node name="Dynamic" type="TileMap" parent="."]
+z_index = -1
+z_as_relative = false
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 32, 32 )
+collision_use_kinematic = true
+format = 1
+
+[node name="PlayerSpawn" parent="." instance=ExtResource( 3 )]
+
+[node name="ExitDoor" parent="." instance=ExtResource( 5 )]
+
+[node name="BombSpawner" parent="." instance=ExtResource( 4 )]
