@@ -1,4 +1,4 @@
-extends Node
+extends "Level.gd"
 
 
 # Declare member variables here. Examples:

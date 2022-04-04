@@ -2,6 +2,7 @@ class_name Level
 extends Node
 
 signal reload_scene
+signal load_scene(scene)
 
 
 var dynamic_layer: TileMap
@@ -15,6 +16,7 @@ func _ready():
 	var player = find_node('Player', true, false)
 	if player:
 		player.connect('tile_collided', self, 'on_collision')
+		player.connect('game_over', self, 'on_game_over')
 
 
 func _input(event):
@@ -30,11 +32,14 @@ func sort_y_desc(a, b):
 func is_tile_empty(pos: Vector2):
 	return dynamic_layer.get_cellv(pos) == TileMap.INVALID_CELL and static_layer.get_cellv(pos) == TileMap.INVALID_CELL
 
+func can_tile_slide(pos: Vector2, dir: Vector2):
+	var is_frictionless = dynamic_layer.get_cellv(pos + Vector2.UP) == TileMap.INVALID_CELL or dir.is_equal_approx(Vector2.DOWN)
+	return is_tile_empty(pos + dir) and is_frictionless
 
-func try_move_tile(pos, new_pos):
-	if is_tile_empty(new_pos):
+func try_move_tile(pos, dir):
+	if can_tile_slide(pos, dir):
 		var tile = dynamic_layer.get_cellv(pos)
-		dynamic_layer.set_cellv(new_pos, tile)
+		dynamic_layer.set_cellv(pos + dir, tile)
 		dynamic_layer.set_cellv(pos, -1)
 
 func _physics_process(_delta):
@@ -44,12 +49,13 @@ func _physics_process(_delta):
 		
 		for pos in dynamic_tiles:
 			# Apply "gravity" to dynamic tiles
-			var down = pos + Vector2.DOWN
-			try_move_tile(pos, down)
+			try_move_tile(pos, Vector2.DOWN)
 
 func on_collision(position, direction):
 	var pos = dynamic_layer.world_to_map(position + 16 * direction) / 2
-	var new_pos = pos + direction
 
-	try_move_tile(pos, new_pos)
+	try_move_tile(pos, direction)
+
+func on_game_over():
+	emit_signal('load_scene', 'res://ui/GameOverMenu.tscn')
 

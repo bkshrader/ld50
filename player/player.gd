@@ -2,6 +2,7 @@ class_name Player
 extends RigidBody2D
 
 signal tile_collided(position, direction)
+signal game_over
 
 # Member Variables
 export var movement_acceleration = 400.0
@@ -76,7 +77,9 @@ func _integrate_forces(state):
 
 
 func destroy():
-	print("Player Destroyed: Game Over")
+	set_visible(false)
+	yield(get_tree().create_timer(1.5), "timeout")
+	emit_signal('game_over')
 
 
 func _on_JumpTimer_timeout():

@@ -1,12 +1,14 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://art/tiles/industrial_zone.tres" type="TileSet" id=1]
 [ext_resource path="res://exit/Exit.tscn" type="PackedScene" id=2]
-[ext_resource path="res://obstacles/Crate.tscn" type="PackedScene" id=3]
+[ext_resource path="res://art/tiles/Obstacles.tres" type="TileSet" id=3]
 [ext_resource path="res://bomb/BombSpawner.tscn" type="PackedScene" id=4]
 [ext_resource path="res://player/PlayerSpawn.tscn" type="PackedScene" id=5]
+[ext_resource path="res://levels/Level1.gd" type="Script" id=6]
 
-[node name="Node2D" type="Node2D"]
+[node name="Level" type="Node2D"]
+script = ExtResource( 6 )
 
 [node name="Background" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
@@ -14,26 +16,24 @@ cell_size = Vector2( 32, 32 )
 format = 1
 tile_data = PoolIntArray( 65537, 4, 196609, 65538, 4, 3, 131074, 4, 65537, 131075, 4, 2, 131076, 4, 2, 131077, 4, 2, 131078, 4, 2, 131079, 4, 2, 131080, 4, 2, 131081, 4, 3, 196610, 4, 65537, 196611, 4, 65538, 196612, 4, 65538, 196613, 4, 65538, 196614, 4, 65538, 196615, 4, 65538, 196616, 4, 65538, 196617, 4, 65539, 262146, 4, 65537, 262147, 4, 65538, 262148, 4, 65538, 262149, 4, 65538, 262150, 4, 65538, 262151, 4, 65538, 262152, 4, 65538, 262153, 4, 65539, 327682, 4, 65537, 327683, 4, 65538, 327684, 4, 65538, 327685, 4, 65538, 327686, 4, 65538, 327687, 4, 65538, 327688, 4, 65538, 327689, 4, 65538, 327690, 4, 2, 327691, 4, 2, 327692, 4, 2, 327693, 4, 3, 393218, 4, 65537, 393219, 4, 65538, 393220, 4, 65538, 393221, 4, 65538, 393222, 4, 65538, 393223, 4, 65538, 393224, 4, 65538, 393225, 4, 65538, 393226, 4, 65538, 393227, 4, 65538, 393228, 4, 65538, 393229, 4, 65539, 458754, 4, 131073, 458755, 4, 131074, 458756, 4, 131074, 458757, 4, 131074, 458758, 4, 131074, 458759, 4, 131074, 458760, 4, 131074, 458761, 4, 131074, 458762, 4, 131074, 458763, 4, 131074, 458764, 4, 131074, 458765, 4, 131075 )
 
-[node name="Foreground" type="TileMap" parent="."]
+[node name="Static" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 32, 32 )
 format = 1
 tile_data = PoolIntArray( 65537, 0, 1, 65538, 0, 196610, 65539, 0, 196610, 65540, 0, 196610, 65541, 0, 196610, 65542, 0, 196610, 65543, 0, 196610, 65544, 0, 196610, 65545, 0, 196610, 65546, 0, 3, 131073, 0, 65536, 131079, 22, 0, 131082, 0, 65536, 196609, 0, 65536, 196615, 22, 0, 196618, 0, 65536, 262145, 0, 65536, 262151, 22, 65536, 262154, 0, 131073, 262155, 0, 196610, 262156, 0, 196610, 262157, 0, 196610, 262158, 0, 3, 327681, 0, 65536, 327694, 0, 65536, 393217, 0, 65536, 393230, 0, 65536, 458753, 0, 65536, 458766, 0, 65536, 524289, 0, 131073, 524290, 0, 196610, 524291, 0, 196610, 524292, 0, 196610, 524293, 0, 196611, 524294, 2, 196609, 524295, 2, 196610, 524296, 2, 196611, 524297, 0, 196609, 524298, 0, 196610, 524299, 0, 196610, 524300, 0, 196610, 524301, 0, 196610, 524302, 0, 131075 )
+
+[node name="Dynamic" type="TileMap" parent="."]
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 32, 32 )
+collision_use_kinematic = true
+format = 1
+tile_data = PoolIntArray( 327690, 0, 0, 393226, 0, 0, 458762, 0, 0 )
 
 [node name="BombSpawner" parent="." instance=ExtResource( 4 )]
 position = Vector2( 240, 176 )
 
 [node name="ExitDoor" parent="." instance=ExtResource( 2 )]
 position = Vector2( 384, 256 )
-
-[node name="Crate" parent="." instance=ExtResource( 3 )]
-position = Vector2( 336, 240 )
-
-[node name="Crate2" parent="." instance=ExtResource( 3 )]
-position = Vector2( 336, 208 )
-
-[node name="Crate3" parent="." instance=ExtResource( 3 )]
-position = Vector2( 336, 176 )
 
 [node name="PlayerSpawn" parent="." instance=ExtResource( 5 )]
 position = Vector2( 112, 240 )
