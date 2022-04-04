@@ -22,6 +22,7 @@ position = Vector2( 512, 192 )
 
 [node name="BombSpawner" parent="." index="5"]
 position = Vector2( 144, 112 )
+fuse_duration = 5
 
 [node name="Door" parent="." index="6" instance=ExtResource( 3 )]
 position = Vector2( 320, 192 )
@@ -30,7 +31,6 @@ trigger = NodePath("../PressurePlate")
 
 [node name="Door2" parent="." index="7" instance=ExtResource( 3 )]
 position = Vector2( 416, 192 )
-opened = true
 inverted = true
 trigger = NodePath("../PressurePlate")
 

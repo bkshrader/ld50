@@ -38,6 +38,9 @@ func on_load_scene(scene):
 		
 	if scene_instance.has_signal('next_scene'):
 		scene_instance.connect('next_scene', self, 'on_next_scene')
+	
+	if scene_instance.has_signal('load_main'):
+		scene_instance.connect('load_main', self, 'on_load_main')
 
 
 func on_reload_scene():
@@ -53,9 +56,12 @@ func on_next_scene():
 	var result = regex.search(history[0])
 	if result:
 		var next_index = int(result.get_string(1)) + 1
-		if next_index <= 10:
+		if next_index < 10:
 			var next_scene = 'res://levels/Level%d.tscn' % next_index
 			on_load_scene(next_scene)
 		else:
-			on_load_scene(history.back())
+			on_load_main()
 
+
+func on_load_main():
+	on_load_scene(history.back())

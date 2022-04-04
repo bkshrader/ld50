@@ -92,6 +92,7 @@ func _integrate_forces(state):
 
 func destroy():
 	set_visible(false)
+	max_movement_speed = 0
 	yield(get_tree().create_timer(1.5), "timeout")
 	emit_signal('game_over')
 

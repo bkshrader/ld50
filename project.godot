@@ -41,6 +41,10 @@ _global_script_class_icons={
 config/name="Fire in the Hole"
 run/main_scene="res://Main.tscn"
 
+[display]
+
+window/size/resizable=false
+
 [gdnative]
 
 singletons=[ "res://addons/godot-git-plugin/git_api.gdnlib" ]
