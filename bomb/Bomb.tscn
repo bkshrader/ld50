@@ -51,10 +51,10 @@ color_ramp = SubResource( 5 )
 radius = 128.0
 
 [node name="Bomb" type="RigidBody2D"]
-z_index = 1
+z_index = 3
 z_as_relative = false
 mode = 2
-mass = 2.0
+mass = 50.0
 physics_material_override = SubResource( 9 )
 continuous_cd = 2
 contacts_reported = 16
@@ -119,7 +119,6 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BlastArea"]
-visible = false
 shape = SubResource( 2 )
 
 [node name="TimerResetSFX" type="AudioStreamPlayer2D" parent="."]
@@ -128,7 +127,13 @@ stream = ExtResource( 5 )
 [node name="BlastFade" type="Timer" parent="."]
 one_shot = true
 
-[connection signal="body_entered" from="." to="." method="_on_Bomb_body_entered"]
+[node name="Tween" type="Tween" parent="."]
+repeat = true
+playback_process_mode = 0
+playback/repeat = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_Fuse_timeout"]
 [connection signal="timeout" from="Beeper" to="." method="_on_Beep"]
 [connection signal="timeout" from="BlastFade" to="." method="queue_free"]

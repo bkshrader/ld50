@@ -1,20 +1,21 @@
+class_name Bomb
 extends RigidBody2D
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+
 export var fuse_duration = 10
 export var beep_interval_min = 0.05
 export var beep_interval_max = 1
 export var blast_area_gradient: Gradient
 export var blast_area_fade_duration = 1.0
 
+var attached_to: Node2D
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$Timer.start(fuse_duration)
-	$Beeper.start(beep_interval_max)
+	reset_timer(false)
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -29,6 +30,11 @@ func _draw():
 	draw_circle(Vector2.ZERO, $BlastArea/CollisionShape2D.shape.radius, color)
 
 
+func _integrate_forces(state):
+	if attached_to:
+		state.set_transform(attached_to.global_transform) 
+
+
 func find_colliding_tiles(tilemap: TileMap):
 	var result = []
 	var tile_rect = RectangleShape2D.new()
@@ -39,6 +45,43 @@ func find_colliding_tiles(tilemap: TileMap):
 		if $BlastArea/CollisionShape2D.shape.collide(blast_area_transform, tile_rect, tile_transform):
 			result.append(pos)
 	return result
+
+
+func reset_timer(play_sound:bool = true):
+	$Timer.start(fuse_duration)
+	$Beeper.start(beep_interval_max)
+	if play_sound:
+		$TimerResetSFX.play()
+
+
+func pause_timer():
+	$Timer.paused = true
+	$Beeper.paused = true
+
+
+func unpause_timer():
+	$Timer.paused = false
+	$Beeper.paused = false
+
+
+func pick_up(attach_to: Node2D):
+	reset_timer()
+	pause_timer()
+	set_deferred("custom_integrator", true)
+	$CollisionShape2D.set_deferred("disabled", true)
+	attached_to = attach_to
+
+
+func drop():
+	unpause_timer()
+	set_deferred("custom_integrator", false)
+	$CollisionShape2D.set_deferred("disabled", false)
+	attached_to = null
+
+
+func throw():
+	pass
+
 
 
 func _on_Fuse_timeout():
@@ -61,10 +104,15 @@ func _on_Fuse_timeout():
 
 func _on_Beep():
 	$TimerSFX.play()
-	$Beeper.set_wait_time(lerp(beep_interval_min, beep_interval_max, $Timer.time_left / $Timer.wait_time))
+	$Beeper.start(lerp(beep_interval_min, beep_interval_max, $Timer.time_left / $Timer.wait_time))
 
 
-func _on_Bomb_body_entered(body):
-	if body.name == "Player" and $Timer.time_left < fuse_duration - 1:
-		$TimerResetSFX.play()
-		$Timer.start(fuse_duration)
+func _on_body_entered(body):
+	if body.name == "Player":
+		reset_timer()
+		pause_timer()
+
+
+func _on_body_exited(body):
+	if body.name == "Player" and not attached_to:
+		unpause_timer()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://player/player.gd" type="Script" id=1]
 
@@ -10,9 +10,13 @@ absorbent = true
 radius = 14.0
 height = 30.0
 
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 48, 13 )
+
 [node name="Player" type="RigidBody2D"]
 z_index = 2
 z_as_relative = false
+collision_layer = 2
 mode = 2
 mass = 10.0
 physics_material_override = SubResource( 2 )
@@ -35,5 +39,14 @@ one_shot = true
 
 [node name="GraceTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="CarryPosition" type="Position2D" parent="."]
+position = Vector2( 32, -8 )
+
+[node name="GrabArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GrabArea"]
+position = Vector2( 0, 13 )
+shape = SubResource( 3 )
 
 [connection signal="timeout" from="JumpTimer" to="." method="_on_JumpTimer_timeout"]

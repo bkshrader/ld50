@@ -14,6 +14,8 @@ export var jump_grace_duration = 0.1
 var is_on_floor = false
 var is_jump_over = true
 
+var holding: Bomb
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -24,6 +26,17 @@ func _ready():
 # func _process(_delta):
 # 	pass
 
+func _input(event):
+	if event is InputEventKey:
+		if event.is_action_pressed("player_interact"):
+			if holding:
+				holding.drop()
+				holding = null
+			else:
+				for body in $GrabArea.get_overlapping_bodies():
+					if body is Bomb:
+						body.pick_up($CarryPosition)
+						holding = body
 
 func _integrate_forces(state):
 	applied_force = Vector2.ZERO  # Clear applied forces
@@ -63,7 +76,7 @@ func _integrate_forces(state):
 		var grounded = is_on_floor or $GraceTimer.time_left > 0
 		var can_jump = is_jump_over and grounded or $JumpTimer.time_left > 0
 		if can_jump:
-			set_axis_velocity(jump_speed * Vector2.UP)
+			set_axis_velocity(jump_speed * (0.2 if holding else 1) * Vector2.UP)
 			if $JumpTimer.is_stopped():
 				$JumpTimer.start(max_jump_duration)
 				$GraceTimer.stop()
@@ -84,3 +97,4 @@ func destroy():
 
 func _on_JumpTimer_timeout():
 	is_jump_over = false
+
