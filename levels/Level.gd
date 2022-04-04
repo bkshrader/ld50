@@ -3,6 +3,7 @@ extends Node
 
 signal reload_scene
 signal load_scene(scene)
+signal next_scene
 
 
 var dynamic_layer: TileMap
@@ -12,6 +13,9 @@ var static_layer: TileMap
 func _ready():
 	dynamic_layer = get_node('Dynamic')
 	static_layer  = get_node('Static')
+	
+	var exit_door = get_node('ExitDoor')
+	exit_door.connect('exit_reached', self, 'on_exit_reached')
 
 	var player = find_node('Player', true, false)
 	if player:
@@ -58,4 +62,7 @@ func on_collision(position, direction):
 
 func on_game_over():
 	emit_signal('load_scene', 'res://ui/GameOverMenu.tscn')
+
+func on_exit_reached():
+	emit_signal('next_scene')
 

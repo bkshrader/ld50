@@ -48,7 +48,7 @@ scale_curve = SubResource( 7 )
 color_ramp = SubResource( 5 )
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 128.0
+radius = 96.0
 
 [node name="Bomb" type="RigidBody2D"]
 z_index = 3
