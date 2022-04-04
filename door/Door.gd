@@ -6,6 +6,7 @@ extends Node2D
 # var a = 2
 # var b = "text"
 export var opened = false setget set_opened, is_opened
+export var inverted = false
 export var open_duration = 0.5
 export var trigger: NodePath
 
@@ -30,24 +31,26 @@ func _ready():
 
 
 func set_opened(open):
+	var should_open = open if not inverted else not open
+	
 	$Tween.remove_all()
-	if open and not self.opened:
+	if should_open and not opened:
 		# Tween door opening
 		$Tween.interpolate_property($Top, "region_rect", REGION_CLOSED, REGION_OPENED,
 		 open_duration, Tween.TRANS_EXPO, Tween.EASE_OUT)
 		$Tween.interpolate_property($Bottom, "region_rect", REGION_CLOSED, REGION_OPENED,
 		 open_duration, Tween.TRANS_EXPO, Tween.EASE_OUT)
-	elif not open and self.opened:
+	elif not should_open and opened:
 		# Tween door closing
 		$Tween.interpolate_property($Top, "region_rect", REGION_OPENED, REGION_CLOSED,
 		 open_duration, Tween.TRANS_EXPO, Tween.EASE_IN)
 		$Tween.interpolate_property($Bottom, "region_rect", REGION_OPENED, REGION_CLOSED,
 		 open_duration, Tween.TRANS_EXPO, Tween.EASE_IN)
 		
-	$Tween.interpolate_callback($Collider/CollisionShape2D, open_duration, 'set_deferred', 'disabled', open)
+	$Tween.interpolate_callback($Collider/CollisionShape2D, open_duration, 'set_deferred', 'disabled', should_open)
 	$Tween.start()
 	
-	opened = open
+	opened = should_open
 
 
 func is_opened():
