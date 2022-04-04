@@ -63,7 +63,7 @@ func unpause_timer():
 
 
 func pick_up(attach_to: Node2D):
-	reset_timer()
+#	reset_timer()
 	pause_timer()
 	set_deferred("custom_integrator", true)
 	$CollisionShape2D.set_deferred("disabled", true)
@@ -99,13 +99,3 @@ func _on_Beep():
 	$TimerSFX.play()
 	$Beeper.start(lerp(beep_interval_min, beep_interval_max, $Timer.time_left / $Timer.wait_time))
 
-
-func _on_body_entered(body):
-	if body.name == "Player":
-		reset_timer()
-		pause_timer()
-
-
-func _on_body_exited(body):
-	if body.name == "Player" and not attached_to:
-		unpause_timer()

@@ -44,7 +44,7 @@ func set_opened(open):
 		$Tween.interpolate_property($Bottom, "region_rect", REGION_OPENED, REGION_CLOSED,
 		 open_duration, Tween.TRANS_EXPO, Tween.EASE_IN)
 		
-	$Tween.interpolate_callback($Collider/CollisionShape2D, open_duration, 'set_disabled', open)
+	$Tween.interpolate_callback($Collider/CollisionShape2D, open_duration, 'set_deferred', 'disabled', open)
 	$Tween.start()
 	
 	opened = open

@@ -63,8 +63,9 @@ func _integrate_forces(state):
 		# var contact_velocity = state.get_contact_collider_velocity_at_position(i)
 		var pos = state.get_contact_local_position(i)
 		var normal = state.get_contact_local_normal(i)
-
-		if body.name == "Dynamic":
+		
+		var moving_towards = abs(normal.x + movement) < 0.5
+		if body.name == "Dynamic" and was_on_floor and moving_towards:
 			emit_signal('tile_collided', to_global(pos), -normal)
 
 		# Check if player is on floor
@@ -76,7 +77,7 @@ func _integrate_forces(state):
 		var grounded = is_on_floor or $GraceTimer.time_left > 0
 		var can_jump = is_jump_over and grounded or $JumpTimer.time_left > 0
 		if can_jump:
-			set_axis_velocity(jump_speed * (0.2 if holding else 1) * Vector2.UP)
+			set_axis_velocity(jump_speed * (0.2 if holding else 1.0) * Vector2.UP)
 			if $JumpTimer.is_stopped():
 				$JumpTimer.start(max_jump_duration)
 				$GraceTimer.stop()
