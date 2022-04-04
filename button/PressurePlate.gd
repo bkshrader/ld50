@@ -7,6 +7,7 @@ signal deactivated
 
 export var pressed = false setget set_pressed, is_pressed
 export var press_duration = 0.4
+export var release_delay = 0.15
 
 
 # Called when the node enters the scene tree for the first time.
@@ -44,7 +45,7 @@ func _on_Area2D_body_entered(_body):
 
 
 func _on_Area2D_body_exited(_body):
-	$ReleaseDelay.start()
+	$ReleaseDelay.start(release_delay)
 
 
 func _on_ReleaseDelay_timeout():

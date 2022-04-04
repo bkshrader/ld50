@@ -5,6 +5,7 @@ const bomb = preload('res://bomb/Bomb.tscn')
 # Member variables
 export var enabled = true
 export var spawn_delay = 1
+export var fuse_duration = 10
 
 
 # Called when the node enters the scene tree for the first time.
@@ -19,4 +20,6 @@ func _process(_delta):
 			$SpawnDelay.start()
 
 func spawn_bomb():
-	add_child(bomb.instance())
+	var bomb_inst = bomb.instance()
+	bomb_inst.set('fuse_duration', fuse_duration)
+	add_child(bomb_inst)

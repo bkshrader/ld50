@@ -17,7 +17,7 @@ colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1 )
 extents = Vector2( 16, 16 )
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 96.0
+radius = 110.0
 
 [sub_resource type="Gradient" id=4]
 offsets = PoolRealArray( 0, 0.130435, 0.826087, 0.937888 )

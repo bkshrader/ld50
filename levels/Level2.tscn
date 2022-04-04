@@ -23,3 +23,4 @@ position = Vector2( 384, 192 )
 
 [node name="BombSpawner" parent="." index="5"]
 position = Vector2( 144, 112 )
+fuse_duration = 5

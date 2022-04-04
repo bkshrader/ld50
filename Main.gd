@@ -41,7 +41,7 @@ func on_load_scene(scene):
 
 
 func on_reload_scene():
-	on_load_scene(history[0])
+	on_load_scene(history.pop_front())
 
 
 func on_previous_scene():

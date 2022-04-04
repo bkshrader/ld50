@@ -25,6 +25,7 @@ contacts_reported = 32
 contact_monitor = true
 can_sleep = false
 script = ExtResource( 1 )
+max_movement_speed = 150.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
