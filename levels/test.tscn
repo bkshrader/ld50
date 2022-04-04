@@ -31,6 +31,7 @@ z_index = -1
 z_as_relative = false
 tile_set = ExtResource( 3 )
 cell_size = Vector2( 32, 32 )
+collision_use_kinematic = true
 format = 1
 tile_data = PoolIntArray( 720912, 0, 0, 720913, 0, 0, 720914, 0, 0, 720915, 0, 0, 720916, 0, 0, 786448, 0, 0, 786449, 0, 0, 786450, 0, 0, 786451, 0, 0, 786452, 0, 0, 1114121, 1, 0 )
 
@@ -49,3 +50,6 @@ margin_top = 47.0
 margin_right = 192.0
 margin_bottom = 96.0
 text = "Test Level"
+
+[node name="Position2D" type="Position2D" parent="."]
+position = Vector2( 128, 544 )

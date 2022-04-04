@@ -29,6 +29,18 @@ func _draw():
 	draw_circle(Vector2.ZERO, $BlastArea/CollisionShape2D.shape.radius, color)
 
 
+func find_colliding_tiles(tilemap: TileMap):
+	var result = []
+	var tile_rect = RectangleShape2D.new()
+	tile_rect.set_extents(tilemap.cell_size)
+	for pos in tilemap.get_used_cells():
+		var tile_transform = Transform2D(0, tilemap.map_to_world(pos))
+		var blast_area_transform = self.global_transform
+		if $BlastArea/CollisionShape2D.shape.collide(blast_area_transform, tile_rect, tile_transform):
+			result.append(pos)
+	return result
+
+
 func _on_Fuse_timeout():
 	set_sleeping(true)
 	$Beeper.stop()
@@ -39,6 +51,10 @@ func _on_Fuse_timeout():
 	$BlastFade.start(blast_area_fade_duration)
 	var bodies = $BlastArea.get_overlapping_bodies()
 	for body in bodies:
+		if body.name == "Dynamic":
+			var tiles = find_colliding_tiles(body)
+			for pos in tiles:
+				body.set_cellv(pos, -1)
 		if body.has_method("destroy"):
 			body.destroy()
 
